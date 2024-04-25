@@ -36,14 +36,17 @@ public class Main
         System.out.println("\n========== GUESS the NUMBER game ===========");
         System.out.println("\nI have genarated a number between 0 and 100");
         System.out.printf("You have %d attempts to guess it\n", MAX_ATTEMPTS);
-        //System.out.printf("Random number: %d\n", randomNumber);
-        while (userGuess != randomNumber && attempts < MAX_ATTEMPTS)
+        while (attempts < MAX_ATTEMPTS)
         {
             attempts++;
             System.out.printf("\n------------- Attempt #%d -------------\n", attempts);
             System.out.print("Guess a number between 0 and 100: ");
             userGuess = keyboard.nextInt();
-            if (userGuess != randomNumber && attempts < MAX_ATTEMPTS)
+            if (userGuess < 0 || userGuess > 100)
+            {
+                System.out.println("Your guess is out of range!");
+            }
+            if (userGuess != randomNumber)
             {
                 if (userGuess > randomNumber)
                 {
@@ -55,15 +58,17 @@ public class Main
                 }
                 if (attempts == MAX_ATTEMPTS)
                 {
-                    System.out.println("You have reached the maximum number of attempts\n");
+                    System.out.println("\nYou have reached the maximum number of attempts and couldn't guess the number  :(");
+                    System.out.printf("The number was: %d\n", randomNumber);
                 }
             }
-            else
+            else if (userGuess == randomNumber )
             {
-                System.out.println("Congratulations! You guessed it!\n");
+                System.out.println("Congratulations! You guessed it!");
+                break ;
             }
         }
         keyboard.close();
-        System.out.println("===========================================\n");
+        System.out.println("\n===========================================\n");
     }
 }
